@@ -1,0 +1,155 @@
+================================================================================
+CUADRO DE SUPERFICIES - LOTEO
+================================================================================
+
+PLANO - DATOS GENERALES
+------------------------
+Ruta limítrofe superior : RUTA PANAMERICANA SUR N°5 / CALETERA RUTA N°5
+Dirección derecha       : A PARGUA
+Dirección izquierda     : A PTO MONTT
+Colindantes             : SUCESION DALMIRO PEREZ / WALDEMAR TOLDO
+Vías internas           : CAMINO INTERIOR
+Medidas externas        : 322,38m / 300,00m / 51,54m / 455,20m / 221,84m
+
+
+================================================================================
+SECCIÓN A
+================================================================================
+
+LOTE   | SUPERFICIE (Hás.) | ESTADO
+-------|-------------------|----------
+A-1 c    | 1,2400            | disponible
+A-1 d    | 1,2400            | disponible
+A-1 e    | 1,2400            | disponible
+A-2      | 0,5006            | disponible
+A-3      | 0,5006            | disponible
+A-4      | 0,5006            | disponible
+A-5      | 0,5006            | disponible
+
+================================================================================
+SECCIÓN B
+================================================================================
+
+LOTE   | SUPERFICIE (Hás.) | ESTADO
+-------|-------------------|----------
+B-1    | 0,5001            | VENDIDO
+B-2    | 0,5001            | VENDIDO
+B-3    | 0,5000            | VENDIDO
+B-4    | 0,5001            | VENDIDO
+B-5    | 0,5001            | VENDIDO
+B-6    | 0,5001            | VENDIDO
+B-7    | 0,5001            | VENDIDO
+B-8    | 0,5001            | VENDIDO
+B-9    | 0,6001            | VENDIDO
+B-10   | 0,6194            | VENDIDO
+B-11   | 0,6174            | disponible
+B-12   | 0,5392            | disponible
+B-13   | 0,5000            | disponible
+B-14   | 0,5000            | disponible
+B-15   | 0,5000            | disponible
+B-16   | 0,5001            | disponible
+B-17   | 0,5000            | disponible
+B-18   | 0,5000            | disponible
+B-19   | 0,7026            | disponible
+B-20   | 1,8973            | disponible
+
+TOTAL SECCIÓN B: 11,8768 Hás.
+
+================================================================================
+SECCIÓN C
+================================================================================
+
+LOTE   | SUPERFICIE (Hás.) | ESTADO
+-------|-------------------|----------
+C-1    | 0,5011            | disponible
+C-2    | 0,5011            | disponible
+C-3    | 0,5011            | disponible
+C-4    | 0,5011            | disponible
+C-5    | 0,5011            | disponible
+C-6    | 0,5011            | disponible
+C-7    | 0,5011            | disponible
+C-8    | 0,5011            | disponible
+C-9    | 0,5011            | disponible
+C-10   | 0,5011            | disponible
+C-11   | 0,5011            | disponible
+C-12   | 0,5011            | disponible
+C-13   | 0,5011            | disponible
+C-14   | 0,5011            | disponible
+C-15   | 0,5011            | disponible
+C-16   | 0,5011            | disponible
+C-17   | 0,5011            | VENDIDO
+C-18   | 0,5011            | disponible
+C-19   | 0,5011            | VENDIDO
+C-20   | 0,6720            | VENDIDO
+C-21   | 0,5011            | VENDIDO
+C-22   | 0,6787            | VENDIDO
+C-23   | 0,7026            | VENDIDO
+
+TOTAL SECCIÓN C: 11,8738 Hás.
+
+================================================================================
+SECCIÓN D
+================================================================================
+
+LOTE   | SUPERFICIE (Hás.) | ESTADO
+-------|-------------------|----------
+D-1    | 0,5197            | disponible
+D-2    | 0,5000            | disponible
+D-3    | 0,5002            | disponible
+D-4    | 0,5173            | disponible
+D-5    | 0,5002            | disponible
+D-6    | 0,5130            | disponible
+D-7    | 0,5130            | disponible
+D-8    | 0,5022            | disponible
+D-9    | 0,5190            | disponible
+D-10   | 0,5064            | disponible
+D-11   | 0,5130            | disponible
+D-12   | 0,5105            | disponible
+D-13   | 0,5105            | disponible
+D-14   | 0,5147            | disponible
+D-15   | 0,5131            | disponible
+D-16   | 0,5189            | disponible
+D-17   | 0,5130            | disponible
+D-18   | 0,5231            | disponible
+D-19   | 0,5315            | disponible
+D-20   | 0,5273            | disponible
+D-21   | 0,5131            | disponible
+D-22   | 0,5315            | disponible
+D-23   | 0,5130            | disponible
+D-24   | 0,5446            | disponible
+D-25   | 0,5305            | disponible
+
+TOTAL SECCIÓN D: 12,9830 Hás.
+
+================================================================================
+SECCIÓN E
+================================================================================
+
+LOTE   | SUPERFICIE (Hás.) | ESTADO
+-------|-------------------|----------
+E-1    | 1,0006            | disponible
+E-2    | 1,0006            | disponible
+E-3    | 1,0006            | disponible
+E-4    | 1,0006            | disponible
+E-5    | 1,0006            | disponible
+E-6    | 1,2188            | disponible
+
+================================================================================
+RESUMEN GENERAL
+================================================================================
+
+Sección B       : 11,8768 Hás.
+Sección C       : 11,8738 Hás.
+Sección D       : 12,9830 Hás.
+Camino interior :  3,8761 Hás.
+Otros (A / E)   : 10,0979 Hás.
+-------------------------------
+TOTAL PREDIO    : 46,8315 Hás.
+
+================================================================================
+NOTA
+================================================================================
+Los lotes marcados como VENDIDO fueron identificados mediante marcas en lapiz (X)
+sobre el plano original. El resto de los lotes figuran como disponibles por defecto;
+modificar manualmente segun corresponda.
+================================================================================

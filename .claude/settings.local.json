@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh repo *)",
+      "WebFetch(domain:github.com)",
+      "Bash(git --version)",
+      "Bash(cp *)",
+      "Skill(impeccable)",
+      "Bash(node *)",
+      "WebSearch",
+      "WebFetch(domain:unsplash.com)",
+      "Bash(curl *)",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\LautaroAraya\\\\Desktop\\\\Proyectos Personales\\\\cat_inmo\\\\impeccable version\\\\index.html\")",
+      "Bash(python *)",
+      "Bash(npm --version)",
+      "Bash(pnpm *)",
+      "PowerShell(pnpm *)",
+      "Bash(npm install *)",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\LautaroAraya\\\\Desktop\\\\Proyectos Personales\\\\cat_inmo\\\\impeccable_ver_2\\\\index.html\")",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\LautaroAraya\\\\Desktop\\\\Proyectos Personales\\\\cat_inmo\\\\vanilla version\\\\index.html\")",
+      "Bash(npx vite *)",
+      "Bash(start index.html)",
+      "Bash(dir)",
+      "Bash(IMPECCABLE_CONTEXT_DIR=\"impeccable_ver_2\" node \"C:\\\\Users\\\\LautaroAraya\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\load-context.mjs\")",
+      "Bash(git init *)",
+      "Bash(git config *)",
+      "Bash(echo \"node_modules/\")",
+      "Bash(echo \".env\")",
+      "Bash(echo \".DS_Store\")"
+    ]
+  }
+}

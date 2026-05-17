@@ -1,0 +1,44 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 252 144" width="480" height="274.2857142857143">
+	<style>
+		tspan { white-space:pre } 
+		.s0 { fill: none;stroke: #000000;stroke-miterlimit:10;stroke-width: .7 } 
+		.s1 { fill: #ffffff;stroke: #000000;stroke-miterlimit:10;stroke-width: .7 } 
+		.s2 { fill: #000000 } 
+		.s3 { fill: #000000;stroke: #000000;stroke-miterlimit:10;stroke-width: .4 } 
+		.t4 { font-size: 4px;fill: #000000;font-weight: 400;font-family: "DejaVuSans", "DejaVu Sans" } 
+	</style>
+	<g id="Layer 1">
+		<path id="Forma 19 copy" fill-rule="evenodd" class="s0" d="m51.5 135c-1.38 0-2.5-1.12-2.5-2.5 0-1.38 1.12-2.5 2.5-2.5 1.38 0 2.5 1.12 2.5 2.5 0 1.38-1.12 2.5-2.5 2.5z"/>
+		<path id="Forma 19 copy 2" fill-rule="evenodd" class="s0" d="m15.5 105c-1.38 0-2.5-1.12-2.5-2.5 0-1.38 1.12-2.5 2.5-2.5 1.38 0 2.5 1.12 2.5 2.5 0 1.38-1.12 2.5-2.5 2.5z"/>
+		<path id="Forma 19 copy 5" fill-rule="evenodd" class="s0" d="m138.5 29c-1.38 0-2.5-1.12-2.5-2.5 0-1.38 1.12-2.5 2.5-2.5 1.38 0 2.5 1.12 2.5 2.5 0 1.38-1.12 2.5-2.5 2.5z"/>
+		<path id="Forma 19 copy 4" fill-rule="evenodd" class="s0" d="m171.5 82c-2.49 0-4.5-2.01-4.5-4.5 0-2.49 2.01-4.5 4.5-4.5 2.49 0 4.5 2.01 4.5 4.5 0 2.49-2.01 4.5-4.5 4.5z"/>
+		<path id="Forma 10" fill-rule="evenodd" class="s1" d="m112.87 82.38l25.44-5.27z"/>
+		<path id="Forma 11" fill-rule="evenodd" class="s1" d="m138.09 77.15l13.35 2.69z"/>
+		<path id="Forma 12" fill-rule="evenodd" class="s1" d="m151.52 79.72l19.75-2.07z"/>
+		<path id="Forma 13" fill-rule="evenodd" class="s1" d="m171.06 77.36l-10.74-19.12z"/>
+		<path id="Forma 14" fill-rule="evenodd" class="s1" d="m160.53 58.36l-4.63-7.87z"/>
+		<path id="Forma 15" fill-rule="evenodd" class="s1" d="m155.9 50.49l-13.31-23.42z"/>
+		<path id="Forma 16" fill-rule="evenodd" class="s1" d="m142.64 27.07l-3.58-20.67z"/>
+		<path id="Forma 17" fill-rule="evenodd" class="s1" d="m117.01 112.92l0.04 6.59z"/>
+		<path id="Forma 18" fill-rule="evenodd" class="s1" d="m117.06 119.34l-1.95 7.7z"/>
+		<path id="Forma 19" fill-rule="evenodd" class="s0" d="m114.5 132c-1.38 0-2.5-1.12-2.5-2.5 0-1.38 1.12-2.5 2.5-2.5 1.38 0 2.5 1.12 2.5 2.5 0 1.38-1.12 2.5-2.5 2.5z"/>
+		<path id="Forma 19 copy 3" fill-rule="evenodd" class="s0" d="m158.5 42c-1.38 0-2.5-1.12-2.5-2.5 0-1.38 1.12-2.5 2.5-2.5 1.38 0 2.5 1.12 2.5 2.5 0 1.38-1.12 2.5-2.5 2.5z"/>
+		<path id="Forma 1" fill-rule="evenodd" class="s1" d="m18.78 104.79l34.4-3.04z"/>
+		<path id="Forma 2" fill-rule="evenodd" class="s1" d="m53.04 101.68l10.34 10.07z"/>
+		<path id="Forma 3" fill-rule="evenodd" class="s1" d="m52.09 130.26l11.36-18.17z"/>
+		<path id="Forma 4" fill-rule="evenodd" class="s1" d="m63.24 111.89l49.94-29.6z"/>
+		<path id="Forma 5" fill-rule="evenodd" class="s1" d="m105.07 102.63l-5.95-12.16z"/>
+		<path id="Forma 6" fill-rule="evenodd" class="s1" d="m99.12 90.26l-15.61-27.7z"/>
+		<path id="Forma 7" fill-rule="evenodd" class="s1" d="m83.51 62.56l-3.44-9.93z"/>
+		<path id="Forma 8" fill-rule="evenodd" class="s1" d="m105.04 102.65l7.4 7.95z"/>
+		<path id="Forma 9" fill-rule="evenodd" class="s1" d="m112.44 110.6l4.42 2.23z"/>
+		<path id="Forma 34" fill-rule="evenodd" class="s2" d="m101.99 79.6l4.13 6.85-5.14 3.1-4.13-6.85z"/>
+	</g>
+	<path id="Forma 31" fill-rule="evenodd" class="s3" d="m104.61 72l-1.66 5.25z"/>
+	<path id="Forma 32" fill-rule="evenodd" class="s3" d="m114.7 70.7l-10.09 1.3z"/>
+	<path id="Forma 33" fill-rule="evenodd" class="s3" d="m103.46 77.18l-0.89 1.39 0.13-1.64z"/>
+	<text id="Predio" style="transform: matrix(.994,-0.114,.114,.994,103.333,70.744)">
+		<tspan x="0" y="0" class="t4">P</tspan><tspan  y="0" class="t4">r</tspan><tspan  y="0" class="t4">e</tspan><tspan  y="0" class="t4">d</tspan><tspan  y="0" class="t4">i</tspan><tspan  y="0" class="t4">o
+</tspan>
+	</text>
+</svg>
