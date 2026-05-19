@@ -619,8 +619,10 @@ button { font: inherit; cursor: pointer; background: none; border: 0; padding: 0
 .pp {
   display: block;
   width: 100%;
+  max-width: 92vh;
   min-width: 660px;
   height: auto;
+  margin-inline: auto;
 }
 
 .pp-cell {

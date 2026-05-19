@@ -11,7 +11,7 @@ export default function Location() {
           <h2 className="font-display text-[clamp(1.75rem,3vw,2.5rem)] font-semibold leading-tight">
             Ubicación y conectividad
           </h2>
-          <p className="kicker text-right">Km 1.054 Ruta 5 Sur · 41° 39′ 12″ S</p>
+          <p className="kicker text-right">Km 1.054 Ruta 5 Sur · 41° 35′ 10″ S</p>
         </header>
 
         <div className="grid gap-8 lg:grid-cols-12">

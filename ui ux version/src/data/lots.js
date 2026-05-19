@@ -23,7 +23,7 @@ export const project = {
   totalSurface:   468315,
   totalHectares:  46.8315,
   lotCount:       74,
-  coords:         "41° 39′ 12″ S · 73° 09′ 47″ O",
+  coords:         "41° 35′ 10″ S · 73° 13′ 52″ O",
   comuna:         "Puerto Montt, Región de Los Lagos",
   km:             "Km 1.054 Ruta 5 Sur",
   ufValue:        38500,
