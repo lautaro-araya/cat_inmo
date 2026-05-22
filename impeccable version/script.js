@@ -2,6 +2,14 @@
   const UF_VALUE = 38500;
 
   const lots = [
+    // ── Sección A ────────────────────────────────────────────────────────────
+    { id: "A-1 c", has: 1.2400, state: "disponible", ufm2: 0.68 },
+    { id: "A-1 d", has: 1.2400, state: "disponible", ufm2: 0.68 },
+    { id: "A-1 e", has: 1.2400, state: "disponible", ufm2: 0.68 },
+    { id: "A-2",   has: 0.5006, state: "disponible", ufm2: 0.88 },
+    { id: "A-3",   has: 0.5006, state: "disponible", ufm2: 0.88 },
+    { id: "A-4",   has: 0.5006, state: "disponible", ufm2: 0.88 },
+    { id: "A-5",   has: 0.5006, state: "disponible", ufm2: 0.88 },
     // ── Sección B ────────────────────────────────────────────────────────────
     { id: "B-1",  has: 0.5001, state: "vendido",    ufm2: 0.95 },
     { id: "B-2",  has: 0.5001, state: "vendido",    ufm2: 0.95 },
@@ -95,21 +103,145 @@
   }
 
   // ── Plat SVG generation ──────────────────────────────────────────────────────
-  const GY  = 120;
-  const LW  = 88,  LH  = 52,  RH  = 55,  CW  = 93;
-  const EW  = 130, EH  = 112, ERH = 116;
-  const SPL = { B: 10, C: 12, D: 13 };
-  const SX  = { B: 65, C: 291, D: 517, E: 743 };
-  const NS  = "http://www.w3.org/2000/svg";
+  // Geometría espejada de impeccable_ver_2 (viewBox 880×855), con shift +30 en y
+  // para abrir espacio al title strip del cadastral. Sección B forma una L:
+  // fila superior (B-20..B-11) + columna derecha (B-10..B-1). C y D usan
+  // dos sub-columnas (números impares/pares). E es columna única (lots altos).
+  // A es la fila horizontal inferior.
+  const NS = "http://www.w3.org/2000/svg";
+
+  // Sección B — fila superior
+  const SX_B_TOP   = 84.75;
+  const BW_TOP     = 65.25;
+  const SX_B_LAST  = 672;    // B-11, lote esquina (más ancho)
+  const BW_LAST    = 100;
+  const SY_B_TOP   = 70;     // B-top empujado +20 para que el tilt no se salga del viewBox
+  const BH_TOP     = 66;
+
+  // Sección B — columna derecha (B-10..B-1)
+  const SX_B_RIGHT = 672;
+  const BW_RIGHT   = 100;
+  const BH_RIGHT   = 46;
+  const BSTEP      = 48;
+  const SY_B_RIGHT = 192;    // alineado con D/C/E (gap con B-top tilted relleno por camino)
+
+  // Sección E — columna izquierda (lots altos)
+  // Arranca pegada al filo inferior rotado de B-20 (~y=60 izq, ~y=71 der) y baja hasta el
+  // camino interior de acceso a Sección A (y=814). 6 bloques de igual altura.
+  const SX_E       = 50;
+  const EW         = 100;
+  const EH         = 123;
+  const ESTEP      = 125;
+  const SY_E       = 66;
+
+  // Sección D — dos sub-columnas (impares en col0, pares en col1)
+  const SX_D0      = 188;
+  const SX_D1      = 292;
+  const DW         = 100;
+  const DH         = 46;
+  const DSTEP      = 48;
+
+  // Sección C — dos sub-columnas (impares en col0, pares en col1)
+  const SX_C0      = 430;
+  const SX_C1      = 534;
+  const CW         = 100;
+  const CH         = 46;
+  const CSTEP      = 48;
+
+  const SY_DC_0    = 192;    // top de sub-col 0 (D-25 / C-23)
+  const SY_DC_1    = 240;    // top de sub-col 1 (D-24 / C-22)
+
+  // Sección A — distribución real del cuadro de superficies (ver media/Orden Seccion A.png).
+  // Tres bloques de izquierda a derecha:
+  //   1) Grilla 2×2 de los lotes pequeños (A-3/A-2 arriba, A-5/A-4 abajo) con camino horizontal en el medio.
+  //   2) Tres lotes verticales A-1 e | A-1 d | A-1 c (1,2400 hás cada uno).
+  //   3) Bloque Copec (A-1 b angosto + A-1 a ancho), dibujados estáticamente en el SVG —
+  //      están vendidos pre-catálogo y no integran el directorio.
+  const SEC_A = {
+    "A-3":   { x: 50,  y: 848, w: 95,  h: 46  },
+    "A-2":   { x: 145, y: 848, w: 95,  h: 46  },
+    "A-5":   { x: 50,  y: 902, w: 95,  h: 46  },
+    "A-4":   { x: 145, y: 902, w: 95,  h: 46  },
+    "A-1 e": { x: 260, y: 848, w: 70,  h: 100 },
+    "A-1 d": { x: 330, y: 848, w: 70,  h: 100 },
+    "A-1 c": { x: 400, y: 848, w: 70,  h: 100 }
+  };
 
   function lotPos(id) {
-    const dash = id.indexOf("-");
-    const sec  = id.slice(0, dash);
-    const n    = parseInt(id.slice(dash + 1));
-    if (sec === "E") return { x: SX.E, y: GY + (n - 1) * ERH, w: EW, h: EH };
-    const col = n <= SPL[sec] ? 0 : 1;
-    const row = n <= SPL[sec] ? n - 1 : n - SPL[sec] - 1;
-    return { x: SX[sec] + col * CW, y: GY + row * RH, w: LW, h: LH };
+    if (id[0] === "A") {
+      const p = SEC_A[id];
+      return { x: p.x, y: p.y, w: p.w, h: p.h };
+    }
+    const sec = id[0];
+    const n   = parseInt(id.slice(id.indexOf("-") + 1));
+
+    if (sec === "E") {
+      // E-6 arriba, E-1 abajo.
+      const idx = 6 - n;
+      return { x: SX_E, y: SY_E + idx * ESTEP, w: EW, h: EH };
+    }
+
+    // Inicio (tope plano) del primer lote regular bajo cada lote de tope diagonal,
+    // alineado al punto más bajo (esquina inferior derecha) del diagonal para no solapar.
+    const D0_START = 166;  // D-23 bajo D-25
+    const D1_START = 177;  // D-22 bajo D-24
+    const C0_START = 191;  // C-21 bajo C-23
+    const C1_START = 202;  // C-20 bajo C-22
+    const BR_START = 186;  // B-9 bajo B-10
+    // Los lotes regulares de D/C/B-right se estiran para llegar al camino horizontal
+    // de acceso a Sección A (y=814). Cada sub-columna reparte su altura entre sus N lotes.
+    const CAMINO_A = 814;
+    const span = (start, count) => (CAMINO_A - start) / count;
+
+    if (sec === "B") {
+      if (n <= 10) {
+        // Columna derecha: B-10 (tope diagonal, colinda con B-11), luego B-9..B-1.
+        const idx = 10 - n;   // B-10 → 0, B-9 → 1, ...
+        if (idx === 0) return { x: SX_B_RIGHT, y: 130, w: BW_RIGHT, h: BH_RIGHT };
+        const step = span(BR_START, 9);   // 9 lotes regulares
+        return { x: SX_B_RIGHT, y: BR_START + (idx - 1) * step, w: BW_RIGHT, h: step - 2 };
+      }
+      // Fila superior: B-20 ancho (se extiende sobre la columna E), B-11 esquina, resto angostos.
+      const isCorner = (n === 11);
+      const isB20    = (n === 20);
+      const idx = 20 - n;    // B-20 → 0, B-19 → 1, ..., B-12 → 8, B-11 → 9
+      let x, w;
+      if (isCorner)   { x = SX_B_LAST;             w = BW_LAST; }
+      // B-20: x local 45.94 (no 50) para que su esquina inferior-izquierda, tras la
+      // rotación de 6°, caiga en screen x=50 — a ras con el costado izquierdo de Sección E.
+      // El borde derecho se mantiene en 150 (colinda con B-19), así w = 150 − 45.94.
+      else if (isB20) { x = 45.94;                 w = 104.06; }
+      else            { x = SX_B_TOP + idx * BW_TOP; w = BW_TOP; }
+      return { x, y: SY_B_TOP, w, h: BH_TOP };
+    }
+
+    if (sec === "D") {
+      if (n % 2 === 1) {   // col0: D-25 (diag), D-23, D-21, ...
+        const idx = (25 - n) / 2;
+        if (idx === 0) return { x: SX_D0, y: 110, w: DW, h: DH };
+        const step = span(D0_START, 12);   // 12 lotes regulares
+        return { x: SX_D0, y: D0_START + (idx - 1) * step, w: DW, h: step - 2 };
+      }
+      const idx = (24 - n) / 2;   // col1: D-24 (diag), D-22, ...
+      if (idx === 0) return { x: SX_D1, y: 120, w: DW, h: DH };
+      const step = span(D1_START, 11);   // 11 lotes regulares
+      return { x: SX_D1, y: D1_START + (idx - 1) * step, w: DW, h: step - 2 };
+    }
+
+    if (sec === "C") {
+      if (n % 2 === 1) {   // col0: C-23 (diag), C-21, ...
+        const idx = (23 - n) / 2;
+        if (idx === 0) return { x: SX_C0, y: 135, w: CW, h: CH };
+        const step = span(C0_START, 11);   // 11 lotes regulares
+        return { x: SX_C0, y: C0_START + (idx - 1) * step, w: CW, h: step - 2 };
+      }
+      const idx = (22 - n) / 2;   // col1: C-22 (diag), C-20, ...
+      if (idx === 0) return { x: SX_C1, y: 146, w: CW, h: CH };
+      const step = span(C1_START, 10);   // 10 lotes regulares
+      return { x: SX_C1, y: C1_START + (idx - 1) * step, w: CW, h: step - 2 };
+    }
+
+    return { x: 0, y: 0, w: 0, h: 0 };
   }
 
   function mkText(parent, x, y, cls, fs, content) {
@@ -125,12 +257,71 @@
   }
 
   const svg = document.querySelector(".plat-svg");
+  const bTopGroup = svg ? svg.querySelector(".b-top-group") : null;
+
+  // Lotes con tope diagonal. D-25/D-24/C-23/C-22 siguen el filo inferior del camino;
+  // B-10 sigue el filo inferior de B-11 (la esquina), para colindar con él. Altura fija.
+  const caminoBottomY = (x) => 105 + (x - 189) * 0.1047;   // filo inferior del camino diagonal
+  const b11BottomY    = (x) => 136 + (x - 772) * 0.1047;   // filo inferior de B-11 (pasa por el pivote 772,136)
+  const DIAG_TOP_FN = {
+    "D-25": caminoBottomY, "D-24": caminoBottomY,
+    "C-23": caminoBottomY, "C-22": caminoBottomY,
+    "B-10": b11BottomY
+  };
+  const DIAG_H = 50;
+
   if (svg) {
     for (const l of lots) {
       const p   = lotPos(l.id);
       const isE = l.id[0] === "E";
+      const isA = l.id[0] === "A";
+      const isE6 = (l.id === "E-6");
+      const isBtop = l.id[0] === "B" && parseInt(l.id.slice(l.id.indexOf("-") + 1)) > 10;
+      const diagFn = DIAG_TOP_FN[l.id];
+      const isDiag = !!diagFn;
+      const big = isE;
+      const med = isA || isBtop;
       const cx  = p.x + p.w / 2;
-      const cy  = p.y + p.h / 2;
+
+      // Geometría: rect normal o paralelogramo (tope diagonal, altura fija DIAG_H).
+      let cy, mkBody;
+      if (isE6) {
+        // E-6 con techo inclinado que sigue el filo inferior rotado de B-20 (de ~60 a la
+        // izquierda hasta ~71 a la derecha), para quedar pegado sin cuña de aire.
+        const topL = 60.0, topR = 70.5;
+        const bot  = p.y + p.h;
+        const pts  = `${p.x},${topL} ${p.x + p.w},${topR} ` +
+                     `${p.x + p.w},${bot.toFixed(1)} ${p.x},${bot.toFixed(1)}`;
+        cy = (((topL + topR) / 2) + bot) / 2;
+        mkBody = (fill) => {
+          const poly = document.createElementNS(NS, "polygon");
+          poly.setAttribute("points", pts);
+          if (fill) poly.setAttribute("fill", fill);
+          return poly;
+        };
+      } else if (isDiag) {
+        const yTL = diagFn(p.x);
+        const yTR = diagFn(p.x + p.w);
+        const yBot = yTR + DIAG_H;   // base PLANA (al punto más bajo) para colindar recto con el lote de abajo
+        const pts = `${p.x},${yTL.toFixed(1)} ${p.x + p.w},${yTR.toFixed(1)} ` +
+                    `${p.x + p.w},${yBot.toFixed(1)} ${p.x},${yBot.toFixed(1)}`;
+        cy = (Math.min(yTL, yTR) + yBot) / 2;
+        mkBody = (fill) => {
+          const poly = document.createElementNS(NS, "polygon");
+          poly.setAttribute("points", pts);
+          if (fill) poly.setAttribute("fill", fill);
+          return poly;
+        };
+      } else {
+        cy = p.y + p.h / 2;
+        mkBody = (fill) => {
+          const r = document.createElementNS(NS, "rect");
+          r.setAttribute("x", p.x);     r.setAttribute("y", p.y);
+          r.setAttribute("width", p.w); r.setAttribute("height", p.h);
+          if (fill) r.setAttribute("fill", fill);
+          return r;
+        };
+      }
 
       const g = document.createElementNS(NS, "g");
       g.setAttribute("class", `lot ${
@@ -140,20 +331,27 @@
       g.setAttribute("data-lot", l.id);
 
       if (l.state !== "disponible") {
-        const rh = document.createElementNS(NS, "rect");
-        rh.setAttribute("x", p.x);     rh.setAttribute("y", p.y);
-        rh.setAttribute("width", p.w); rh.setAttribute("height", p.h);
-        rh.setAttribute("fill", l.state === "vendido" ? "url(#hatch-sold)" : "url(#hatch-reserved)");
-        g.appendChild(rh);
+        g.appendChild(mkBody(l.state === "vendido" ? "url(#hatch-sold)" : "url(#hatch-reserved)"));
       }
+      g.appendChild(mkBody(null));
 
-      const r = document.createElementNS(NS, "rect");
-      r.setAttribute("x", p.x);     r.setAttribute("y", p.y);
-      r.setAttribute("width", p.w); r.setAttribute("height", p.h);
-      g.appendChild(r);
-
-      mkText(g, cx, cy + (isE ? -8 : -3),  "lot-num",  isE ? "13" : "9.5", l.id);
-      mkText(g, cx, cy + (isE ? 9 : 7),    "lot-area", isE ? "8.5" : "6.5",
+      const fsNum  = big ? "13" : (med || isDiag) ? "11"  : "9.5";
+      const fsArea = big ? "8.5" : (med || isDiag) ? "7.5" : "6.5";
+      let   dyNum  = big ? -8   : med ? -4    : -3;
+      let   dyArea = big ? 9    : med ? 8     : 7;
+      // Lotes A-1 c/d/e: verticales y altos (h=100). Separo verticalmente
+      // el ID y la superficie para que respiren dentro del rect.
+      if (isA && p.h > 80) {
+        dyNum  = -15;
+        dyArea = 15;
+      }
+      // Trapecios D/C: texto cerca del tope diagonal.
+      if (isDiag) {
+        dyNum  = -6;
+        dyArea = 9;
+      }
+      mkText(g, cx, cy + dyNum,  "lot-num",  fsNum,  l.id);
+      mkText(g, cx, cy + dyArea, "lot-area", fsArea,
              l.has.toFixed(4).replace(".", ",") + " hás");
 
       if (l.state !== "disponible" && isE) {
@@ -162,7 +360,8 @@
         st.setAttribute("letter-spacing", "1.5");
       }
 
-      svg.appendChild(g);
+      // B-top lots se cuelgan del grupo rotado (transform en HTML) para tiltear como bloque
+      (isBtop && bTopGroup ? bTopGroup : svg).appendChild(g);
     }
   }
 
@@ -175,11 +374,14 @@
                  l.state === "reservado" ? "st-reserved" : "st-avail";
       const sl = l.state === "vendido"   ? "Vendido"     :
                  l.state === "reservado" ? "Reservado"   : "Disponible";
-      const rol = "PARC-" + l.id.replace("-", "");
+      const slug = l.id.replace(/\s/g, "-");
+      const rol  = "PARC-" + l.id.replace(/[-\s]/g, "");
 
       const tr = document.createElement("tr");
       tr.className    = "lot-row";
       tr.dataset.state = l.state;
+      tr.dataset.sec   = l.id[0];
+      tr.dataset.lot   = l.id;
       tr.innerHTML = `
         <td class="c-num"><span class="big-num">${l.id}</span></td>
         <td class="c-sup num">${l.area.toLocaleString("es-CL")} m²</td>
@@ -189,12 +391,12 @@
         <td class="c-total num">${l.ufTotal.toLocaleString("es-CL")}</td>
         <td class="c-clp num">${l.clp}</td>
         <td class="c-state"><span class="state ${sc}">${sl}</span></td>
-        <td class="c-act"><button class="row-toggle" aria-expanded="false" aria-controls="detail-${l.id}">Detalle</button></td>`;
+        <td class="c-act"><button class="row-toggle" aria-expanded="false" aria-controls="detail-${slug}">Detalle</button></td>`;
       tbody.appendChild(tr);
 
       const dt = document.createElement("tr");
       dt.className = "lot-detail";
-      dt.id        = `detail-${l.id}`;
+      dt.id        = `detail-${slug}`;
       dt.hidden    = true;
 
       const notasHtml = l.state === "vendido"
@@ -224,44 +426,80 @@
     }
   }
 
-  // ── Filter bar ────────────────────────────────────────────────────────────────
-  const filterBar = document.querySelector(".filter-bar");
-  const table     = document.getElementById("lot-table");
-  if (!filterBar || !table) return;
+  // ── Filter bars (estado + sección) ───────────────────────────────────────────
+  const stateBar = document.querySelector(".filter-bar:not(.filter-bar--sec)");
+  const secBar   = document.querySelector(".filter-bar--sec");
+  const table    = document.getElementById("lot-table");
+  if (!stateBar || !table) return;
 
-  const rows   = Array.from(table.querySelectorAll("tr.lot-row"));
-  const counts = { todos: rows.length, disponible: 0, reservado: 0, vendido: 0 };
-  for (const r of rows) counts[r.dataset.state] = (counts[r.dataset.state] || 0) + 1;
-  for (const btn of filterBar.querySelectorAll(".filt")) {
+  const rows = Array.from(table.querySelectorAll("tr.lot-row"));
+
+  const stateCounts = { todos: rows.length, disponible: 0, vendido: 0 };
+  for (const r of rows) stateCounts[r.dataset.state] = (stateCounts[r.dataset.state] || 0) + 1;
+  for (const btn of stateBar.querySelectorAll(".filt")) {
     const c = btn.querySelector(".count");
-    if (c) c.textContent = counts[btn.dataset.filter] ?? 0;
+    if (c) c.textContent = stateCounts[btn.dataset.filter] ?? 0;
   }
 
-  function applyFilter(f) {
-    for (const b of filterBar.querySelectorAll(".filt")) {
-      const on = b.dataset.filter === f;
+  if (secBar) {
+    const secCounts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+    for (const r of rows) secCounts[r.dataset.sec] = (secCounts[r.dataset.sec] || 0) + 1;
+    for (const btn of secBar.querySelectorAll(".filt")) {
+      const c = btn.querySelector(".count");
+      if (c) c.textContent = secCounts[btn.dataset.sec] ?? 0;
+    }
+  }
+
+  let activeState = "todos";
+  let activeSec   = "A";
+
+  function apply() {
+    for (const b of stateBar.querySelectorAll(".filt")) {
+      const on = b.dataset.filter === activeState;
       b.classList.toggle("is-active", on);
-      b.setAttribute("aria-pressed", on);
+      b.setAttribute("aria-pressed", String(on));
+    }
+    if (secBar) {
+      for (const b of secBar.querySelectorAll(".filt")) {
+        const on = b.dataset.sec === activeSec;
+        b.classList.toggle("is-active", on);
+        b.setAttribute("aria-pressed", String(on));
+      }
     }
     for (const r of rows) {
-      const vis = f === "todos" || r.dataset.state === f;
+      const stateOk = activeState === "todos" || r.dataset.state === activeState;
+      const secOk   = !secBar || r.dataset.sec === activeSec;
+      const vis     = stateOk && secOk;
       r.dataset.hidden = vis ? "false" : "true";
       if (!vis) {
-        const id  = r.querySelector(".row-toggle").getAttribute("aria-controls");
-        const det = document.getElementById(id);
-        if (det) {
-          det.hidden = true;
-          r.querySelector(".row-toggle").setAttribute("aria-expanded", "false");
-          r.querySelector(".row-toggle").textContent = "Detalle";
+        const btn = r.querySelector(".row-toggle");
+        if (btn) {
+          const det = document.getElementById(btn.getAttribute("aria-controls"));
+          if (det) det.hidden = true;
+          btn.setAttribute("aria-expanded", "false");
+          btn.textContent = "Detalle";
         }
       }
     }
   }
 
-  filterBar.addEventListener("click", (e) => {
+  apply();
+
+  stateBar.addEventListener("click", (e) => {
     const btn = e.target.closest(".filt");
-    if (btn) applyFilter(btn.dataset.filter);
+    if (!btn) return;
+    activeState = btn.dataset.filter;
+    apply();
   });
+
+  if (secBar) {
+    secBar.addEventListener("click", (e) => {
+      const btn = e.target.closest(".filt");
+      if (!btn) return;
+      activeSec = btn.dataset.sec;
+      apply();
+    });
+  }
 
   table.addEventListener("click", (e) => {
     const btn = e.target.closest(".row-toggle");
@@ -280,11 +518,14 @@
       g.style.cursor = "pointer";
       g.addEventListener("click", () => {
         const id    = g.dataset.lot;
-        const panel = document.getElementById(`detail-${id}`);
+        const slug  = id.replace(/\s/g, "-");
+        const panel = document.getElementById(`detail-${slug}`);
         const row   = panel?.previousElementSibling;
         const btn   = row?.querySelector(".row-toggle");
         if (!btn || !panel) return;
-        applyFilter("todos");
+        activeState = "todos";
+        activeSec   = id[0];
+        apply();
         btn.setAttribute("aria-expanded", "true");
         btn.textContent = "Cerrar";
         panel.hidden    = false;

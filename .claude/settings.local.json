@@ -65,7 +65,8 @@
       "Bash(rm _lotsblock.html)",
       "Bash(git -C 'C:\\\\Users\\\\HP\\\\desktop\\\\loteo-pargua-sur' status --short)",
       "Bash(git -C 'C:\\\\Users\\\\HP\\\\desktop\\\\loteo-pargua-sur' ls-files --others --exclude-standard)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(start *)"
     ]
   }
 }

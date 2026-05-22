@@ -1,4 +1,4 @@
-# PRODUCT — Loteo Pargua Sur
+# PRODUCT — Proyecto El Empalme
 
 ## Resumen
 Catálogo web de venta para un loteo industrial de 2 ha entre Puerto Montt y Pargua, Región de Los Lagos, Chile.
@@ -45,7 +45,7 @@ Strategy: **Committed.**
 - Dos fotos de Unsplash verificadas para contexto regional (Ruta 5 / aproximación a Pargua).
 
 ## Supuestos (a confirmar con cliente real)
-- Nombre: "Loteo Pargua Sur" (placeholder, reemplazable).
+- Nombre: "Proyecto El Empalme".
 - 10 lotes de 1.500 a 2.500 m².
 - Precio: 0.6 a 1.0 UF/m².
 - Infraestructura: acceso pavimentado, electricidad trifásica, APR/pozo, fibra. Sin servidumbre.

@@ -1,5 +1,5 @@
 /* ========================================================================
-   Loteo Pargua Sur · sistema de diseño
+   Proyecto El Empalme · sistema de diseño
    Voz: resuelto, intemperizado, geológico.
    Estrategia de color: Committed (óxido corten).
    Familia única: Bricolage Grotesque (variable wdth + wght + opsz).
@@ -29,7 +29,7 @@
   --font: "Bricolage Grotesque", system-ui, sans-serif;
 
   /* tipografía — clamps fluidos */
-  --fs-display:  clamp(5.5rem, 22vw, 22rem);
+  --fs-display:  clamp(4.25rem, 15vw, 13rem);
   --fs-h-sect:   clamp(2rem, 4.2vw, 4rem);
   --fs-lede:     clamp(1.0625rem, 1.4vw, 1.375rem);
   --fs-body:     1rem;
@@ -214,14 +214,15 @@ button { font: inherit; cursor: pointer; }
   grid-area: display;
   margin: 0;
   font-size: var(--fs-display);
-  font-variation-settings: "wdth" 80, "wght" 750, "opsz" 96;
+  font-variation-settings: "wdth" 78, "wght" 750, "opsz" 96;
   line-height: 0.84;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
   color: var(--ink);
 }
 
 .display-line {
   display: block;
+  white-space: nowrap;
 }
 
 .line-a {
@@ -376,18 +377,28 @@ button { font: inherit; cursor: pointer; }
   font-variation-settings: "wdth" 100, "wght" 600;
 }
 
-.plat-svg .lot rect {
+.plat-svg .lot rect,
+.plat-svg .lot polygon {
   fill: transparent;
   stroke: var(--ink);
   stroke-width: 1.5;
   transition: fill 200ms var(--ease-out);
 }
 
-.plat-svg .lot:hover rect { fill: var(--oxide-wash); }
+.plat-svg .lot:hover rect,
+.plat-svg .lot:hover polygon { fill: var(--oxide-wash); }
 
-.plat-svg .lot-sold rect:last-of-type {
+.plat-svg .lot-sold rect:last-of-type,
+.plat-svg .lot-sold polygon:last-of-type {
   stroke: var(--oxide-deep);
   stroke-width: 1.5;
+}
+
+/* Primer cuerpo del lote vendido: reaplica el rayado diagonal (el atributo fill="url(#hatch-sold)"
+   del JS lo pisa la regla .lot { fill: transparent }, así que hay que forzarlo por CSS). */
+.plat-svg .lot-sold rect:first-of-type,
+.plat-svg .lot-sold polygon:first-of-type {
+  fill: url(#hatch-sold);
 }
 
 .plat-svg .lot-num {
@@ -481,17 +492,6 @@ button { font: inherit; cursor: pointer; }
   background: transparent;
 }
 
-.sw-reserved {
-  background:
-    repeating-linear-gradient(
-      45deg,
-      transparent 0,
-      transparent 3px,
-      var(--ink-soft) 3px,
-      var(--ink-soft) 4px
-    );
-}
-
 .sw-sold {
   background:
     repeating-linear-gradient(
@@ -529,6 +529,12 @@ button { font: inherit; cursor: pointer; }
   flex-wrap: wrap;
   gap: 0.4rem;
   padding: 1.25rem 0 0.5rem;
+}
+
+.filter-bar + .filter-bar {
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--rule);
+  margin-top: 0.15rem;
 }
 
 .filt {
@@ -637,7 +643,6 @@ button { font: inherit; cursor: pointer; }
 }
 
 .st-avail { color: var(--ink); background: var(--paper-soft); }
-.st-reserved { color: var(--ink-soft); background: var(--paper-deep); }
 .st-sold { color: var(--oxide-deep); background: var(--oxide-wash); }
 
 .row-toggle {
