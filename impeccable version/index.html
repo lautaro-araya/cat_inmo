@@ -151,11 +151,11 @@
 
       <!-- Lot groups inserted here by script.js -->
 
-      <!-- North arrow (top-right corner) -->
+      <!-- North arrow: flecha y «N» apuntando a la esquina superior derecha -->
       <g transform="translate(848, 65)">
         <rect x="-18" y="-18" width="36" height="36" fill="var(--paper)" stroke="var(--ink)" stroke-width="1" />
-        <polygon points="0,-13 4,4 0,1 -4,4" fill="var(--ink)" />
-        <text y="-21" text-anchor="middle" class="north-lbl" font-size="10">N</text>
+        <polygon points="0,-13 4,4 0,1 -4,4" fill="var(--ink)" transform="rotate(45)" />
+        <text x="21" y="-21" text-anchor="middle" class="north-lbl" font-size="10">N</text>
       </g>
 
       <!-- Ruta Panamericana Sur N°5 bar (relocated BELOW subdivision plan) -->
@@ -200,14 +200,13 @@
   </div>
 
   <div class="filter-bar" role="toolbar" aria-label="Filtrar por estado">
-    <button class="filt is-active" data-filter="todos" aria-pressed="true">Todos <span class="count">81</span></button>
-    <button class="filt" data-filter="disponible" aria-pressed="false">Disponibles <span class="count">65</span></button>
-    <button class="filt" data-filter="vendido" aria-pressed="false">Vendidos <span class="count">16</span></button>
+    <button class="filt is-active" data-filter="todos" aria-pressed="true">Todos <span class="count">74</span></button>
+    <button class="filt" data-filter="disponible" aria-pressed="false">Disponibles <span class="count">56</span></button>
+    <button class="filt" data-filter="vendido" aria-pressed="false">Vendidos <span class="count">18</span></button>
   </div>
 
   <div class="filter-bar filter-bar--sec" role="toolbar" aria-label="Filtrar por sección">
-    <button class="filt is-active" data-sec="A" aria-pressed="true">Sección A <span class="count">7</span></button>
-    <button class="filt" data-sec="B" aria-pressed="false">Sección B <span class="count">20</span></button>
+    <button class="filt is-active" data-sec="B" aria-pressed="true">Sección B <span class="count">20</span></button>
     <button class="filt" data-sec="C" aria-pressed="false">Sección C <span class="count">23</span></button>
     <button class="filt" data-sec="D" aria-pressed="false">Sección D <span class="count">25</span></button>
     <button class="filt" data-sec="E" aria-pressed="false">Sección E <span class="count">6</span></button>

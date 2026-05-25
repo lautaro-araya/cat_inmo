@@ -94,12 +94,19 @@
     style: "currency", currency: "CLP", maximumFractionDigits: 0
   });
 
+  // Precio por superficie anclado a las dos referencias del proyecto:
+  //   5.000 m² → $46.000.000 · 10.000 m² → $66.000.000
+  // Relación lineal: $26.000.000 base + $4.000 por m². La UF se deriva del CLP.
+  const priceCLP = (m2) => 26_000_000 + 4_000 * m2;
+
   for (const l of lots) {
-    l.area    = Math.round(l.has * 10000);
-    l.frente  = Math.round(Math.sqrt(l.area / 2));
-    l.fondo   = Math.round(l.area / l.frente);
-    l.ufTotal = Math.round(l.area * l.ufm2);
-    l.clp     = fmt.format(l.ufTotal * UF_VALUE);
+    l.area     = Math.round(l.has * 10000);
+    l.frente   = Math.round(Math.sqrt(l.area / 2));
+    l.fondo    = Math.round(l.area / l.frente);
+    l.clpValue = priceCLP(l.area);
+    l.ufTotal  = Math.round(l.clpValue / UF_VALUE);
+    l.ufm2     = l.clpValue / l.area / UF_VALUE;
+    l.clp      = fmt.format(l.clpValue);
   }
 
   // ── Plat SVG generation ──────────────────────────────────────────────────────
@@ -350,9 +357,12 @@
         dyNum  = -6;
         dyArea = 9;
       }
-      mkText(g, cx, cy + dyNum,  "lot-num",  fsNum,  l.id);
-      mkText(g, cx, cy + dyArea, "lot-area", fsArea,
-             l.has.toFixed(4).replace(".", ",") + " hás");
+      // Sección A: sin superficie en el plano; el ID se centra al no haber área.
+      mkText(g, cx, cy + (isA ? 4 : dyNum), "lot-num", fsNum, l.id);
+      if (!isA) {
+        mkText(g, cx, cy + dyArea, "lot-area", fsArea,
+               l.has.toFixed(4).replace(".", ",") + " hás");
+      }
 
       if (l.state !== "disponible" && isE) {
         const st = mkText(g, cx, cy + 23, "lot-state" + (l.state === "vendido" ? " lot-state-sold" : ""), "7",
@@ -370,6 +380,7 @@
   if (tbody) {
     tbody.innerHTML = "";
     for (const l of lots) {
+      if (l.id[0] === "A") continue;   // Sección A oculta del directorio (vendida)
       const sc = l.state === "vendido"   ? "st-sold"     :
                  l.state === "reservado" ? "st-reserved" : "st-avail";
       const sl = l.state === "vendido"   ? "Vendido"     :
@@ -450,7 +461,7 @@
   }
 
   let activeState = "todos";
-  let activeSec   = "A";
+  let activeSec   = "B";
 
   function apply() {
     for (const b of stateBar.querySelectorAll(".filt")) {
