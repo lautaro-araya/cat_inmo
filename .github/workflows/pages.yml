@@ -1,0 +1,47 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # El sitio vive en "impeccable version/" y referencia las imágenes como
+      # ../media/. Ensamblamos un _site plano: contenido del sitio en la raíz,
+      # media/ junto a él, y reescribimos ../media/ -> media/ en el index.
+      - name: Ensamblar sitio
+        run: |
+          mkdir -p _site
+          cp -r "impeccable version/." _site/
+          cp -r media _site/media
+          sed -i 's#\.\./media/#media/#g' _site/index.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

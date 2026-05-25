@@ -3,13 +3,13 @@
 
   const lots = [
     // ── Sección A ────────────────────────────────────────────────────────────
-    { id: "A-1 c", has: 1.2400, state: "disponible", ufm2: 0.68 },
-    { id: "A-1 d", has: 1.2400, state: "disponible", ufm2: 0.68 },
-    { id: "A-1 e", has: 1.2400, state: "disponible", ufm2: 0.68 },
-    { id: "A-2",   has: 0.5006, state: "disponible", ufm2: 0.88 },
-    { id: "A-3",   has: 0.5006, state: "disponible", ufm2: 0.88 },
-    { id: "A-4",   has: 0.5006, state: "disponible", ufm2: 0.88 },
-    { id: "A-5",   has: 0.5006, state: "disponible", ufm2: 0.88 },
+    { id: "A-1 c", has: 1.2400, state: "vendido",    ufm2: 0.68 },
+    { id: "A-1 d", has: 1.2400, state: "vendido",    ufm2: 0.68 },
+    { id: "A-1 e", has: 1.2400, state: "vendido",    ufm2: 0.68 },
+    { id: "A-2",   has: 0.5006, state: "vendido",    ufm2: 0.88 },
+    { id: "A-3",   has: 0.5006, state: "vendido",    ufm2: 0.88 },
+    { id: "A-4",   has: 0.5006, state: "vendido",    ufm2: 0.88 },
+    { id: "A-5",   has: 0.5006, state: "vendido",    ufm2: 0.88 },
     // ── Sección B ────────────────────────────────────────────────────────────
     { id: "B-1",  has: 0.5001, state: "vendido",    ufm2: 0.95 },
     { id: "B-2",  has: 0.5001, state: "vendido",    ufm2: 0.95 },
@@ -32,7 +32,7 @@
     { id: "B-19", has: 0.7026, state: "disponible", ufm2: 1.05 },
     { id: "B-20", has: 1.8973, state: "disponible", ufm2: 1.05 },
     // ── Sección C ────────────────────────────────────────────────────────────
-    { id: "C-1",  has: 0.5011, state: "disponible", ufm2: 0.98 },
+    { id: "C-1",  has: 0.5011, state: "vendido",    ufm2: 0.98 },
     { id: "C-2",  has: 0.5011, state: "disponible", ufm2: 0.98 },
     { id: "C-3",  has: 0.5011, state: "disponible", ufm2: 0.98 },
     { id: "C-4",  has: 0.5011, state: "disponible", ufm2: 0.98 },
@@ -42,18 +42,18 @@
     { id: "C-8",  has: 0.5011, state: "disponible", ufm2: 0.98 },
     { id: "C-9",  has: 0.5011, state: "disponible", ufm2: 0.98 },
     { id: "C-10", has: 0.5011, state: "disponible", ufm2: 0.98 },
-    { id: "C-11", has: 0.5011, state: "disponible", ufm2: 0.98 },
-    { id: "C-12", has: 0.5011, state: "disponible", ufm2: 0.98 },
-    { id: "C-13", has: 0.5011, state: "disponible", ufm2: 0.98 },
-    { id: "C-14", has: 0.5011, state: "disponible", ufm2: 0.98 },
+    { id: "C-11", has: 0.5011, state: "vendido",    ufm2: 0.98 },
+    { id: "C-12", has: 0.5011, state: "vendido",    ufm2: 0.98 },
+    { id: "C-13", has: 0.5011, state: "vendido",    ufm2: 0.98 },
+    { id: "C-14", has: 0.5011, state: "vendido",    ufm2: 0.98 },
     { id: "C-15", has: 0.5011, state: "disponible", ufm2: 0.98 },
     { id: "C-16", has: 0.5011, state: "disponible", ufm2: 0.98 },
-    { id: "C-17", has: 0.5011, state: "vendido",    ufm2: 0.95 },
+    { id: "C-17", has: 0.5011, state: "disponible", ufm2: 0.98 },
     { id: "C-18", has: 0.5011, state: "disponible", ufm2: 0.98 },
     { id: "C-19", has: 0.5011, state: "vendido",    ufm2: 0.95 },
-    { id: "C-20", has: 0.6720, state: "vendido",    ufm2: 0.95 },
+    { id: "C-20", has: 0.6720, state: "disponible", ufm2: 0.98 },
     { id: "C-21", has: 0.5011, state: "vendido",    ufm2: 0.95 },
-    { id: "C-22", has: 0.6787, state: "vendido",    ufm2: 0.95 },
+    { id: "C-22", has: 0.6787, state: "disponible", ufm2: 0.98 },
     { id: "C-23", has: 0.7026, state: "vendido",    ufm2: 0.95 },
     // ── Sección D ────────────────────────────────────────────────────────────
     { id: "D-1",  has: 0.5197, state: "disponible", ufm2: 0.92 },
@@ -400,14 +400,13 @@
       dt.hidden    = true;
 
       const notasHtml = l.state === "vendido"
-        ? `<li>Lote escriturado. Superficie según cuadro de superficies aprobado.</li>`
-        : `<li>Superficie según cuadro de superficies aprobado.</li>
-           <li>Servicios disponibles: agua, electricidad trifásica Saesa y fibra óptica.</li>
-           <li>Financiamiento hipotecario disponible mediante entidades bancarias.</li>`;
+        ? `<li>Parcela vendida. Operación cerrada.</li>`
+        : `<li>Parcela de 5.000 o 10.000 m², con rol individual aprobado por el SII.</li>
+           <li>Electrificación trifásica (factibilidad Saesa) y agua por pozo profundo en proyecto.</li>
+           <li>Caminos de 10 m y cunetas de drenaje ya ejecutados.</li>`;
 
       const antecedentesExtra = l.state !== "vendido"
-        ? `<dt>Disponible desde</dt><dd>01.03.2026</dd>
-           <dt>Forma de pago</dt><dd>Contado · pie 20 % + saldo 90 días, o crédito hipotecario</dd>` : "";
+        ? `<dt>Forma de pago</dt><dd>Vale vista en custodia notarial hasta inscripción en el Conservador</dd>` : "";
 
       dt.innerHTML = `<td colspan="9"><div class="detail-grid">
         <div class="d-block">
@@ -533,4 +532,65 @@
       });
     }
   }
+})();
+
+// ── Carrusel de galería · reutilizable (secciones 03 y 04) ───────────────────
+// Cada .obra-gallery es un carrusel autónomo: lámina principal + tira de miniaturas.
+// Los datos (imagen, leyenda, código) se leen del marcado de cada miniatura y del
+// data-caption del contenedor, de modo que basta añadir otro bloque .obra-gallery
+// para tener un carrusel más. Réplica del funcionamiento de galeria.html.
+(() => {
+  const pad = (n) => String(n).padStart(2, "0");
+
+  document.querySelectorAll(".obra-gallery").forEach((root) => {
+    const main   = root.querySelector(".g-main img");
+    const thumbs = Array.from(root.querySelectorAll(".g-thumb"));
+    if (!main || thumbs.length === 0) return;
+
+    const nameEl    = root.querySelector(".g-name");
+    const codeEl    = root.querySelector(".g-code");
+    const counterEl = root.querySelector(".g-counter");
+    const caption   = root.dataset.caption || "";
+    const total     = thumbs.length;
+    let current     = 0;
+
+    function goTo(idx) {
+      current = (idx + total) % total;
+      const t     = thumbs[current];
+      const img   = t.querySelector("img");
+      const src   = img ? img.src : "";
+      const label = t.dataset.label || "";
+      const code  = t.dataset.code || "";
+      main.style.opacity = "0";
+      setTimeout(() => {
+        main.src = src;
+        main.alt = label;
+        main.style.opacity = "1";
+      }, 200);
+      if (nameEl)    nameEl.textContent    = label;
+      if (codeEl)    codeEl.textContent    = caption ? code + " · " + caption : code;
+      if (counterEl) counterEl.textContent = pad(current + 1) + " / " + pad(total);
+      thumbs.forEach((el, i) => {
+        if (i === current) el.setAttribute("aria-current", "true");
+        else el.removeAttribute("aria-current");
+      });
+    }
+
+    thumbs.forEach((t, i) => t.addEventListener("click", () => goTo(i)));
+
+    const prev = root.querySelector("[data-nav='prev']");
+    const next = root.querySelector("[data-nav='next']");
+    if (prev) prev.addEventListener("click", () => goTo(current - 1));
+    if (next) next.addEventListener("click", () => goTo(current + 1));
+
+    // La lámina principal avanza al pulsarla y responde a las flechas del teclado.
+    const mainBox = root.querySelector(".g-main");
+    if (mainBox) {
+      mainBox.addEventListener("click", () => goTo(current + 1));
+      mainBox.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") { e.preventDefault(); goTo(current + 1); }
+        else if (e.key === "ArrowLeft") { e.preventDefault(); goTo(current - 1); }
+      });
+    }
+  });
 })();
